@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const FormControl = styled.div `
 
     width: 500px;
-    height: 200px;
+    height: 400px;
     margin-top: 200px;
     border-radius: 10px;
     background-color: grey;
@@ -25,6 +25,16 @@ const Input = styled.input `
     border-radius: 10px;
     padding: 5px;
 
+`;
+const InputDescription = styled.textarea `
+    width: 150px;
+    height: 100px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 5px;
+    flex-wrap: wrap;
+
 `
 
 
@@ -34,14 +44,16 @@ function TableHomewors () {
 
     const changeInputState = (event) => setHomework(event.target.value); 
 
-    console.log(homeworkValue)
-
     return (
         <FormControl>
-         <Input 
-         value={homeworkValue} 
-         placeholder='Homework'
-         onChange={(event)=> changeInputState(event)}/>
+            <Input 
+            value={homeworkValue} 
+            placeholder='Homework'
+            onChange={(event)=> changeInputState(event)}/>
+            <InputDescription
+            value={homeworkValue} 
+            placeholder='Description'
+            onChange={(event)=> changeInputState(event)}/>
             <Button title="Insert"/>
         </FormControl>
     )
