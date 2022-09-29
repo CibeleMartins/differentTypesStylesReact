@@ -1,11 +1,13 @@
 import Counter from '../src/components/Counter/Counter';
-import Button from '../src/components/Button/Button';
+import TableHomeworks from '../src/components/TableHomeworks/TableHomeworks';
 
 function App() {
   return (
     <div className="App">
      
-    <Counter/>
+    {/* <Counter/> */}
+
+    <TableHomeworks/>
     </div>
   );
 }
