@@ -1,3 +1,4 @@
+import { useState } from 'react';
 
 import Button from '../Button/Button';
 import styled from 'styled-components';
@@ -29,9 +30,18 @@ const Input = styled.input `
 
 function TableHomewors () {
 
+    const [homeworkValue, setHomework] = useState('')
+
+    const changeInputState = (event) => setHomework(event.target.value); 
+
+    console.log(homeworkValue)
+
     return (
         <FormControl>
-         <Input placeholder='Homework'/>
+         <Input 
+         value={homeworkValue} 
+         placeholder='Homework'
+         onChange={(event)=> changeInputState(event)}/>
             <Button title="Insert"/>
         </FormControl>
     )
