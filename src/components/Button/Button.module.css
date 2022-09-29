@@ -1,3 +1,7 @@
 .btn {
-    background-color: red;
+    width: 10%;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(18, 204, 18);
 }

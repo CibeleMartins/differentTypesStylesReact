@@ -1,16 +1,17 @@
 import Button from '../Button/Button';
-import './Counter.css'
+import './Counter.css';
 
-function Counter () {
+function Counter ({number}) {
 
     return (
-        <div>
-            <div>
-                <h3>number</h3>
+        <div className="main">
+            <div className="mainText">
+                <h3>{number}</h3>
             </div>
 
-            <div>
-                <Button className="button"/>
+            <div className="mainBtn">
+                <Button title="+"/>
+                <Button title="-"/>
             </div>
         </div>
     )
