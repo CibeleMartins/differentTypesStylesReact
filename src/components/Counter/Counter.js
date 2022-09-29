@@ -5,15 +5,31 @@ import './Counter.css';
 function Counter () {
 
     const [number, setNumber] = useState(0)
+    const [isPositive, setPositive] = useState(true)
+    // const [isNegative, setNegative] = useState(true)
 
-    const inc = () => setNumber(number + 1)
+    const inc = () => {
 
-    const dec = () => setNumber(number -1)
+        if (number > 0) {
+
+            setPositive(true)
+        }
+        setNumber(number + 1)
+    }
+
+    const dec = () => {
+
+        if (number < 0) {
+         setPositive(false)
+        }
+
+      setNumber(number -1)
+    }
 
     return (
         <div className="main">
             <div className="mainText">
-                <h3>{number}</h3>
+                <h3 style={{color: isPositive ? 'green' : 'red'}}>{number}</h3>
             </div>
 
             <div className="mainBtn">
