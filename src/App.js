@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
      
-    <Counter number={0}/>
+    <Counter/>
     </div>
   );
 }
