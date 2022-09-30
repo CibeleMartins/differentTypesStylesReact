@@ -3,8 +3,6 @@ import { useState } from 'react';
 import Button from '../Button/Button';
 import styled from 'styled-components';
 
-import {arrayHomeworks} from './data'
-
 const MainForm = styled.form `  
 display: flex;
 flex-direction: column;
@@ -69,23 +67,27 @@ const PostIt = styled.div `
     `;
 
 
-function TableHomewors () {
+function TableHomewors (props) {
 
     const [homeworkValue, setHomework] = useState('')
-    const [description, setDescription] = useState('')
+    // const [description, setDescription] = useState('')
 
     const changeInputState = (event) => setHomework(event.target.value); 
-    const changeDescription = (event) => setDescription(event.target.value); 
+    // const changeDescription = (event) => setDescription(event.target.value); 
+
+    const [postIt, setPostIt] = useState([])
 
     const formSubmit = (event) => {
 
         event.preventDefault();
-        arrayHomeworks.push({id: Math.random(parseInt()).toFixed(2), title: homeworkValue, decribe: description})
-        console.log(arrayHomeworks)
-    
+        
+       const homeworks = [];
+
+       homeworks.unshift({id: Math.random(parseFloat()).toString() ,title: homeworkValue})
+
+       setPostIt(prevState => [...prevState, ...homeworks])
+        console.log(...homeworks)
     }
-
-
 
 
 
@@ -98,18 +100,17 @@ function TableHomewors () {
                 value={homeworkValue} 
                 placeholder='Homework'
                 onChange={(event)=> changeInputState(event)}/>
-                <InputDescription
+                {/* <InputDescription
                 value={description} 
                 placeholder='Description'
-                onChange={(event)=> changeDescription(event)}/>
+                onChange={(event)=> changeDescription(event)}/> */}
                 <Button title="Insert" />
             </FormControl>
         </MainForm>
 
 
         <MainPostIt>
-           
-             {arrayHomeworks.map((i) => <h1>{i.title}</h1>)}
+                {postIt.map(i => <h3>{i.title}</h3>)}
         </MainPostIt>
         </>
 
