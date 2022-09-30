@@ -5,6 +5,12 @@ import styled from 'styled-components';
 
 import {arrayHomeworks} from './data'
 
+const MainForm = styled.form `  
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: center;
+`
 
 const FormControl = styled.div `
 
@@ -42,7 +48,8 @@ const InputDescription = styled.textarea `
 
 const MainPostIt = styled.div `
     margin-top: 40px;
-    width: 500px;
+    width: 100;
+    height: auto;
     background-color: lavender;
     border: 10px solid grey;
     border-radius: 10px;
@@ -50,7 +57,7 @@ const MainPostIt = styled.div `
     display: flex; 
     flex-wrap: wrap;
     justify-content: space-around;
-    aling-items:center;
+  
 `;
 
 const PostIt = styled.div `
@@ -66,40 +73,43 @@ function TableHomewors () {
 
     const [homeworkValue, setHomework] = useState('')
     const [description, setDescription] = useState('')
- 
 
     const changeInputState = (event) => setHomework(event.target.value); 
     const changeDescription = (event) => setDescription(event.target.value); 
 
-    const createPostIt = () => {
+    const formSubmit = (event) => {
 
-        const homework = homeworkValue;
-        const descrip = description;
-        return  arrayHomeworks.push({title: homework, describe: descrip})
-   
+        event.preventDefault();
+        arrayHomeworks.push({id: Math.random(parseInt()).toFixed(2), title: homeworkValue, decribe: description})
+        console.log(arrayHomeworks)
+    
     }
+
+
+
+
+
 
     return (
         <>
-        <FormControl>
-            <Input 
-            value={homeworkValue} 
-            placeholder='Homework'
-            onChange={(event)=> changeInputState(event)}/>
-            <InputDescription
-            value={description} 
-            placeholder='Description'
-            onChange={(event)=> changeDescription(event)}/>
-            <Button onClick={()=> createPostIt()} title="Insert"/>
-        </FormControl>
+        <MainForm onSubmit={formSubmit}>
+            <FormControl>
+                <Input 
+                value={homeworkValue} 
+                placeholder='Homework'
+                onChange={(event)=> changeInputState(event)}/>
+                <InputDescription
+                value={description} 
+                placeholder='Description'
+                onChange={(event)=> changeDescription(event)}/>
+                <Button title="Insert" />
+            </FormControl>
+        </MainForm>
+
 
         <MainPostIt>
-            {arrayHomeworks.map((h)=> {
-                return (<PostIt>
-                    <h3>{h.title}</h3>
-                    <p>{h.describe}</p>
-                </PostIt>)
-            })}
+           
+             {arrayHomeworks.map((i) => <h1>{i.title}</h1>)}
         </MainPostIt>
         </>
 
