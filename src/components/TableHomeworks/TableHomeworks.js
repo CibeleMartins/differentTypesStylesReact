@@ -8,15 +8,22 @@ display: flex;
 flex-direction: column;
 justify-content: space-evenly;
 align-items: center;
+`;
+
+const Title = styled.h1 `
+    width: 100%;
+    text-align: center;
+    color: black;
+    font-weight: 200;
 `
 
 const FormControl = styled.div `
 
-    width: 500px;
-    height: 400px;
-    margin-top: 100px;
+    width: 100%;
+    height: 300px;
+    margin-top: 50px;
     border-radius: 10px;
-    background-color: grey;
+    background-color: lavender;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -33,14 +40,13 @@ const Input = styled.input `
 
 `;
 const InputDescription = styled.textarea `
-    width: 150px;
+    width: 50%;
     height: 100px;
     border: none;
     outline: none;
     border-radius: 10px;
     padding: 5px;
     flex-wrap: wrap;
-
 `;
 
 
@@ -49,33 +55,36 @@ const MainPostIt = styled.div `
     width: 100;
     height: auto;
     background-color: lavender;
-    border: 10px solid grey;
-    border-radius: 10px;
     padding: 20px;
     display: flex; 
     flex-wrap: wrap;
     justify-content: space-around;
-  
 `;
 
 const PostIt = styled.div `
-
-    width: 200px;
+    width: 30%;
     height: 200px;
     padding: 10px;
-    background-color: yellow
+    background-color: #FFFACD;
+    border-radius: 10px;
     `;
 
 
 function TableHomewors (props) {
 
-    const [homeworkValue, setHomework] = useState('')
-    // const [description, setDescription] = useState('')
+    const [homeworkValue, setHomework] = useState('');
+    const [description, setDescription] = useState('');
 
     const changeInputState = (event) => setHomework(event.target.value); 
-    // const changeDescription = (event) => setDescription(event.target.value); 
+    const changeDescription = (event) => setDescription(event.target.value); 
 
-    const [postIt, setPostIt] = useState([])
+    const [postIt, setPostIt] = useState([]);
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
+      }
 
     const formSubmit = (event) => {
 
@@ -83,34 +92,40 @@ function TableHomewors (props) {
         
        const homeworks = [];
 
-       homeworks.unshift({id: Math.random(parseFloat()).toString() ,title: homeworkValue})
+       const positionColors = getRandomInt(0,5)
+
+       const colors = ['#B0E0E6', '#D8BFD8', '#FFE4E1', '#F0FFF0', '#FFE4C4', '#F8F8FF'];
+
+       homeworks.unshift({id: Math.random(parseFloat()).toString(), title: homeworkValue, decribe: description, color: colors[positionColors] })
 
        setPostIt(prevState => [...prevState, ...homeworks])
-        console.log(...homeworks)
-    }
-
-
-
+    };
 
     return (
         <>
         <MainForm onSubmit={formSubmit}>
+
+           <Title>Organize your hamoworks here!</Title>
             <FormControl>
                 <Input 
                 value={homeworkValue} 
                 placeholder='Homework'
                 onChange={(event)=> changeInputState(event)}/>
-                {/* <InputDescription
+                <InputDescription
                 value={description} 
                 placeholder='Description'
-                onChange={(event)=> changeDescription(event)}/> */}
-                <Button title="Insert" />
+                onChange={(event)=> changeDescription(event)}/>
+                <Button style={{background: 'pink', fontSize: 20}} title="Insert" />
             </FormControl>
         </MainForm>
 
-
         <MainPostIt>
-                {postIt.map(i => <h3>{i.title}</h3>)}
+                {postIt.map((i) => {
+                    return <PostIt key={i.id} style={{background: i.color}}>
+                     <h3>{i.title}</h3>
+                    <p>{i.decribe}</p>
+                    </PostIt>
+                })}
         </MainPostIt>
         </>
 
